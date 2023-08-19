@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+
+  nginx-ci4:
+    container_name: nginx-ci4
+    image: nginx:latest
+    restart: always
+    ports:
+      - protocol: tcp
+        published: 80
+        target: 80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./codeigniter4-v4.3.7:/var/www/html
+    networks:
+      - ci4-docker-network
+    depends_on:
+      - ci4-docker
+    links:
+      - ci4-docker
+
+  ci4-docker:
+    container_name: ci4-docker
+    build: .
+    volumes:
+      - ./codeigniter4-v4.3.7:/var/www/html
+      - /var/www/html/vendor
+    networks:
+      - ci4-docker-network
+
+networks:
+  ci4-docker-network:
+    name: ci4-docker-network
+    driver: bridge
