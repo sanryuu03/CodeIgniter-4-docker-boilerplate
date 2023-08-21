@@ -1,5 +1,9 @@
 # Release Notes
 
+## v1.0.3 (2023-08-21)
+
+- cors => php spark make:filter Cors
+
 ## v1.0.2 (2023-08-21)
 
 - buat Models => php spark make:model ProductsModel
